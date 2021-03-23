@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo-db
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - backend-service-with-mongo-db
+
+  # App backend service
+  spring-boot-mongo-backend:
+    container_name: spring-boot-mongo-backend
+    # Configuration for building the docker image for the backend service
+    build:
+      context: . # Use an image built from the specified dockerfile.
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=local"
+    depends_on:
+      - mongo-db
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend-service-with-mongo-db
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend-service-with-mongo-db:
