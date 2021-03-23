@@ -11,5 +11,6 @@ Simple example that represents Spring Boot backend application which interacts w
 Workflow
 ========
 ## Run project
-1. Run: **docker-compose up --build** command from  project root directory
-2. Stop: **docker-compose down --remove-orphans** command from  project root directory
+1. Run: **mvn clean install** command from  project root directory to build jar file.
+2. Run: **docker-compose up --build** command from  project root directory to build and run docker containers.
+3. Stop: **docker-compose down --remove-orphans** command from  project root directory.
